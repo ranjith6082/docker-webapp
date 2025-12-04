@@ -200,6 +200,27 @@
  		            </execution>
  		        </executions>
  		</plugin>
+
+
+		<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-surefire-plugin</artifactId>
+			  <version>2.22.2</version>
+			  <configuration>
+			    <!-- give more heap to test JVM -->
+			    <argLine>-Xmx1024m -XX:MaxMetaspaceSize=256m</argLine>
+			
+			    <!-- reduce concurrency issues while debugging -->
+			    <forkCount>1</forkCount>
+			    <reuseForks>true</reuseForks>
+			
+			    <!-- prevent tests that call System.exit from killing build entirely -->
+			    <enableAssertions>true</enableAssertions>
+			    <!-- print stdout/stderr to surefire reports -->
+			    <redirectTestOutputToFile>false</redirectTestOutputToFile>
+  				</configuration>
+		</plugin>
+
 		
         </plugins>
     </build>
